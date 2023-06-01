@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cohorts Overview</title>
+</head>
+<body>
+<h1>Overview of Cohorts</h1>
+</body>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <tr th:each="cohort : ${cohorts}">
+    <td th:text="${cohort.name}"></td>
+    <td th:text="${cohort.status}"></td>
+  </tr>
+</table>
+</html>
