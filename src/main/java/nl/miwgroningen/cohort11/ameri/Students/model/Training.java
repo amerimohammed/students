@@ -18,5 +18,6 @@ public class Training {
     @Id@GeneratedValue
     private Long trainingId;
     private String name;
+    private int period;
 
 }

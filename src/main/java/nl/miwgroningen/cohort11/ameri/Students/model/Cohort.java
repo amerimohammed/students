@@ -13,12 +13,12 @@ import javax.persistence.*;
 @Setter
 @Getter
 public class Cohort {
-    @Id@GeneratedValue
+    @Id
+    @GeneratedValue
     private Long cohortId;
 
     private String Name;
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
-
 }
