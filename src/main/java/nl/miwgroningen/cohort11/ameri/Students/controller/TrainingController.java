@@ -28,7 +28,7 @@ public class TrainingController {
         return "trainingOverview";
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     private String SaveUpdateTraining (@ModelAttribute("training") Training training, BindingResult result){
            if(!result.hasErrors()){
                trainingRepository.save(training);

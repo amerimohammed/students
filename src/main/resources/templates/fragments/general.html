@@ -56,33 +56,5 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </div>
 
-<!-- active page link -->
-<div th:fragment="trainings">
-    <script>
-        $(document).ready(function(){
-            $(".active").removeClass("active");
-            $("#trainings").addClass("active");
-        });
-    </script>
-</div>
-
-<div th:fragment="cohorts">
-    <script>
-        $(document).ready(function(){
-            $(".active").removeClass("active");
-            $("#cohorts").addClass("active");
-        });
-    </script>
-</div>
-
-<div th:fragment="students">
-    <script>
-        $(document).ready(function(){
-            $(".active").removeClass("active");
-            $("#students").addClass("active");
-        });
-    </script>
-</div>
-
 </body>
 </html>
