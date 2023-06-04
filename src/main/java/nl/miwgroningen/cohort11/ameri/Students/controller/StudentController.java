@@ -29,7 +29,7 @@ public class StudentController {
         return "studentForm";
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     private String saveOrUpdateStudent(@ModelAttribute Student student, BindingResult result) {
         if (!result.hasErrors()) {
             studentRepository.save(student);
@@ -37,7 +37,7 @@ public class StudentController {
         return "redirect:/";
     }
 
-    @GetMapping({"/", "/overview"})
+    @GetMapping({"", "/overview"})
     private String showStudentsOverview(Model model){
         List<Student> students = studentRepository.findAll();
         model.addAttribute("students", students);

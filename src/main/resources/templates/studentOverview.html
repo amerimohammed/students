@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Students Overview</title>
-  <style>
-    table, th, td {
-      border: 1px dotted black;
-      border-collapse: collapse;
-      padding: 5px;
-    }
-  </style>
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>trainingOverview</title>
 </head>
 <body>
-<h1>Students Overview</h1>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone Number</th>
-    <th>Address</th>
-  </tr>
-  <tr th:each="student : ${students}">
-    <td th:text="${student.name}"></td>
-    <td th:text="${student.email}"></td>
-    <td th:text="${student.phoneNumber}"></td>
-    <td th:text="${student.address}"></td>
-  </tr>
-</table>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<main class="container main-content" id="pills-home">
+    <h1 class="text-center">Students Overview</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Address</th>
+        </tr>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.email}"></td>
+            <td th:text="${student.phoneNumber}"></td>
+            <td th:text="${student.address}"></td>
+        </tr>
+    </table>
+</main>
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
 </body>
 </html>

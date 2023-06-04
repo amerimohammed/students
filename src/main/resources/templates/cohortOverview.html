@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Cohorts Overview</title>
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>trainingOverview</title>
 </head>
 <body>
-<h1>Overview of Cohorts</h1>
-</body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<main class="container main-content" id="pills-home">
+  <h1 class="text-center">Cohorts Overview</h1>
 <table>
   <tr>
     <th>Name</th>
@@ -16,4 +18,10 @@
     <td th:text="${cohort.status}"></td>
   </tr>
 </table>
+</main>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+
+</body>
 </html>

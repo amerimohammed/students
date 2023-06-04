@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:fragment="baseHeader(title)">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title th:replace="${title}">Dit is een algemene titel</title>
+    <title th:replace="${title}">Dit is een algemene titel</title>
 
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-  <link rel="stylesheet" type="text/css" href="/css/library.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
 
 <div th:fragment="navbar">
-  <ul class="nav justify-content-center">
-    <li class="nav-item">
-      <a class="nav-link" th:href="@{/}">Trainings</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" th:href="@{/cohort}">Cohorts</a>
-    </li>
-  </ul>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary bg-light navbar-fixed-top shadow-sm">
+        <div class="container justify-content-between">
+
+            <a class="navbar-brand" href="#">Make IT Work</a>
+            <div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">Trainings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/cohort">Cohorts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/student">Students</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 
 <div th:fragment="footer">
-  <footer><p class="text-center text text-muted">
-    Copyright Students Training &copy;
-    <script type="text/javascript">document.write( new Date().getFullYear() );</script>.
-  </p></footer>
+    <footer>
+        <p class="text-center text text-muted">
+            Copyright Students Training &copy;
+            <script type="text/javascript">document.write(new Date().getFullYear().toString());</script>
+            .
+        </p>
+    </footer>
 </div>
 
 <div th:fragment="bottomScripts">
-  <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-  <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </div>
 
 </body>
