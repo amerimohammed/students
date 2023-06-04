@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Mohammed Alameri on 01/06/2023.
@@ -35,6 +38,17 @@ public class TrainingController {
            }
 
            return "redirect:/";
+    }
+
+    @GetMapping("/training/delete/{trainingId}")
+    private String deleteTraining(@PathVariable("trainingId") Long trainingId) {
+        Optional<Training> optionalTraining = trainingRepository.findById(trainingId);
+
+        if (optionalTraining.isPresent()) {
+            trainingRepository.delete(optionalTraining.get());
+        }
+
+        return "redirect:/";
     }
 
 }
