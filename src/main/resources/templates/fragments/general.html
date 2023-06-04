@@ -25,13 +25,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Trainings</a>
+                            <a class="nav-link active" id="trainings" aria-current="page" href="/">Trainings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/cohort">Cohorts</a>
+                            <a class="nav-link" id="cohorts" href="/cohort">Cohorts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/student">Students</a>
+                            <a class="nav-link" id="students" href="/student">Students</a>
                         </li>
                     </ul>
                 </div>
@@ -54,6 +54,34 @@
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</div>
+
+<!-- active page link -->
+<div th:fragment="trainings">
+    <script>
+        $(document).ready(function(){
+            $(".active").removeClass("active");
+            $("#trainings").addClass("active");
+        });
+    </script>
+</div>
+
+<div th:fragment="cohorts">
+    <script>
+        $(document).ready(function(){
+            $(".active").removeClass("active");
+            $("#cohorts").addClass("active");
+        });
+    </script>
+</div>
+
+<div th:fragment="students">
+    <script>
+        $(document).ready(function(){
+            $(".active").removeClass("active");
+            $("#students").addClass("active");
+        });
+    </script>
 </div>
 
 </body>
