@@ -14,9 +14,9 @@ import javax.persistence.Id;
 @Entity
 @Setter
 @Getter
-public class Training {
+public class Course {
     @Id@GeneratedValue
-    private Long trainingId;
+    private Long courseId;
     private String name;
     private int period;
 

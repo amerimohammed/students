@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Courses Overview</title>
+</head>
+<body>
+
+<div th:replace="fragments/general :: navbar"></div>
+
+<main class="container main-content" id="pills-home">
+    <h1 class="text-center">Courses Overview</h1>
+    <section>
+        <div class="d-flex mb-3 justify-content-end">
+            <button type="button" class="btn btn-outline-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#course-modal"
+                    course-name=""
+                    course-period=""
+                    course-id=""
+                    th:onclick="updateCourseModalForm(this,
+                                this.getAttribute('course-name'),
+                                 this.getAttribute('course-period'),
+                                 this.getAttribute('course-id'),
+                            )"
+            >
+                New +
+            </button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Period</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course: ${courses}">
+                <th scope="row" th:text="${course.getCourseId}"></th>
+                <td th:text="${course.name}"></td>
+                <td><span th:text="${course.period}"></span> month/s</td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#course-modal"
+                            th:course-name="${course.name}"
+                            th:course-period="${course.period}"
+                            th:course-id="${course.getCourseId}"
+                            th:onclick="updateCourseModalForm(this,
+                                this.getAttribute('course-name'),
+                                 this.getAttribute('course-period'),
+                                 this.getAttribute('course-id'),
+                            )"
+                    >
+                        <span th:replace="fragments/icons :: editIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#delete-modal' + ${course.getCourseId}">
+                        <span th:replace="fragments/icons :: deleteIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#courseModal">
+                        <span th:replace="fragments/icons :: infoIcon"></span>
+                    </button>
+
+                    <div th:replace="fragments/course :: courseDeleteModal(${course})"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<div th:replace="fragments/course :: courseModal(${course})"></div>
+
+<div th:replace="fragments/general :: footer"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+<div th:replace="fragments/course :: courseScripts"></div>
+
+</body>
+</html>

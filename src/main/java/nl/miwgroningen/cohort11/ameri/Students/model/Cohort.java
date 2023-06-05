@@ -23,5 +23,5 @@ public class Cohort {
     private Status status;
 
     @ManyToOne
-    private Training training;
+    private Course course;
 }

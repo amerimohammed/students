@@ -2,34 +2,34 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Training Fragments</title>
+    <title>Course Fragments</title>
 </head>
 <body>
 
-<!-- New/Edit training Modal -->
-<div class="modal fade" tabindex="-1" aria-labelledby="trainingModal" aria-hidden="true"
-     th:fragment="trainingModal(training)"
-     id="training-modal"
+<!-- New/Edit course Modal -->
+<div class="modal fade" tabindex="-1" aria-labelledby="courseModal" aria-hidden="true"
+     th:fragment="courseModal(course)"
+     id="course-modal"
 >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">New/Edit Training</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">New/Edit Course</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/}" method="post" th:object="${training}">
-                <input type="hidden" th:field="*{trainingId}" id="trainingId" />
+            <form th:action="@{/}" method="post" th:object="${course}">
+                <input type="hidden" th:field="*{courseId}" id="courseId" />
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="trainingName" class="col-form-label">Training Name:</label>
-                        <input type="text" class="form-control" id="trainingName"
+                        <label for="courseName" class="col-form-label">course Name:</label>
+                        <input type="text" class="form-control" id="courseName"
                                placeholder="example: Software Engineering"
                                th:field="*{name}"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="trainingPeriod" class="col-form-label">Period in Months:</label>
-                        <input type="number" class="form-control" id="trainingPeriod"
+                        <label for="coursePeriod" class="col-form-label">Period in Months:</label>
+                        <input type="number" class="form-control" id="coursePeriod"
                                placeholder="example: 3"
                                th:field="*{period}"
                         >
@@ -46,22 +46,22 @@
 </div>
 
 <!-- Delete confirmation Modal -->
-<div class="modal fade" tabindex="-1" aria-labelledby="trainingModal" aria-hidden="true"
-     th:fragment="trainingDeleteModal(training)"
-     th:id="delete-modal + ${training.trainingId}"
+<div class="modal fade" tabindex="-1" aria-labelledby="courseDeleteModal" aria-hidden="true"
+     th:fragment="courseDeleteModal(course)"
+     th:id="delete-modal + ${course.courseId}"
 >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Delete Training</h1>
+                <h1 class="modal-title fs-5">Delete course</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/training/delete/{trainingId}(trainingId=${training.trainingId})}"
+            <form th:action="@{/course/delete/{courseId}(courseId=${course.courseId})}"
                   method="get">
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="alert alert-danger" role="alert">
-                            Are you sure you want to delete the training: <b th:text="${training.name}"></b>?
+                            Are you sure you want to delete the course: <b th:text="${course.name}"></b>?
                         </div>
                     </div>
                 </div>
@@ -75,8 +75,8 @@
 </div>
 
 
-<div th:fragment="trainingScripts">
-    <script th:src="@{/js/training.js}"></script>
+<div th:fragment="courseScripts">
+    <script th:src="@{/js/course.js}"></script>
 </div>
 </body>
 </html>

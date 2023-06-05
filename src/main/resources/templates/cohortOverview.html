@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>trainingOverview</title>
+    <title>Cohorts Overview</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Training</th>
+                <th scope="col">Course</th>
                 <th scope="col">Status</th>
                 <th scope="col" class="text-end">Actions</th>
             </tr>
@@ -23,7 +23,7 @@
             <tr th:each="cohort : ${cohorts}">
                 <th scope="row" th:text="${cohort.cohortId}"></th>
                 <td th:text="${cohort.name}"></td>
-                <td th:text="${cohort.training.name}"></td>
+                <td th:text="${cohort.course.name}"></td>
                 <td th:text="${cohort.status}"
                     th:classappend="${cohort.status.toString() == 'COMPLETED'} ?
         'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
@@ -31,7 +31,7 @@
 
                 <td class="text-end">
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                            data-bs-target="#training-modal"
+                            data-bs-target="#course-modal"
                     >
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>
@@ -40,7 +40,7 @@
                         <span th:replace="fragments/icons :: deleteIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                            data-bs-target="#trainingModal">
+                            data-bs-target="#cohortModal">
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
             </tr>
