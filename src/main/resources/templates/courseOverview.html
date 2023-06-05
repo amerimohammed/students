@@ -55,7 +55,7 @@
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                            th:attr="data-bs-target='#delete-modal' + ${course.getCourseId}">
+                            th:attr="data-bs-target='#delete-modal' + ${course.courseId}">
                         <span th:replace="fragments/icons :: deleteIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#courseModal">
