@@ -54,9 +54,10 @@
                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#courseModal">
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
-
-                    <div th:replace="fragments/course :: courseDeleteModal(${course})"></div>
                 </td>
+
+                <div th:replace="fragments/course :: courseDeleteModal(${course})"></div>
+
             </tr>
             </tbody>
         </table>
