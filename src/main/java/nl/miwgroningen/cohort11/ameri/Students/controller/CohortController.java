@@ -3,6 +3,7 @@ package nl.miwgroningen.cohort11.ameri.Students.controller;
 import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Cohort;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
+import nl.miwgroningen.cohort11.ameri.Students.repository.TrainingRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class CohortController {
     private final CohortRepository cohortRepository;
+    private final TrainingRepository trainingRepository;
 
     @GetMapping({"","/overview"})
     private String showCohortOverview(Model model){
         model.addAttribute("cohorts", cohortRepository.findAll());
+        model.addAttribute("trainings", trainingRepository.findAll());
+        model.addAttribute("cohort", new Cohort());
         return "cohortOverview";
     }
 

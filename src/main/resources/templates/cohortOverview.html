@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-  <title>trainingOverview</title>
+    <title>trainingOverview</title>
 </head>
 <body>
 
 <div th:replace="fragments/general :: navbar"></div>
-
 <main class="container main-content" id="pills-home">
-  <h1 class="text-center">Cohorts Overview</h1>
-<table>
-  <tr>
-    <th>Name</th>
-  </tr>
-  <tr th:each="cohort : ${cohorts}">
-    <td th:text="${cohort.name}"></td>
-    <td th:text="${cohort.status}"></td>
-  </tr>
-</table>
+    <h1 class="text-center">Cohorts Overview</h1>
+    <section>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Training</th>
+                <th scope="col">Status</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cohort : ${cohorts}">
+                <th scope="row" th:text="${cohort.cohortId}"></th>
+                <td th:text="${cohort.name}"></td>
+                <td th:text="${cohort.training.name}"></td>
+                <td th:text="${cohort.status}"
+                    th:classappend="${cohort.status.toString() == 'COMPLETED'} ?
+        'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
+                ></td>
+
+                <td class="text-end">
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#training-modal"
+                    >
+                        <span th:replace="fragments/icons :: editIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#delete-modal' + ${cohort.cohortId}">
+                        <span th:replace="fragments/icons :: deleteIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                            data-bs-target="#trainingModal">
+                        <span th:replace="fragments/icons :: infoIcon"></span>
+                    </button>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 
 <div th:replace="fragments/general :: footer"></div>

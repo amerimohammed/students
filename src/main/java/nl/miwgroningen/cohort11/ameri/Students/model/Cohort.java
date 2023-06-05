@@ -21,4 +21,7 @@ public class Cohort {
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
+
+    @ManyToOne
+    private Training training;
 }
