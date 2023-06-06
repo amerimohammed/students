@@ -13,7 +13,7 @@
         <div class="d-flex mb-3 justify-content-end">
             <button type="button" class="btn btn-outline-success"
                     data-bs-toggle="modal"
-                    data-bs-target="#student-modal"
+                    th:attr="data-bs-target='#student-modal' + ${student.studentId}"
             >
                 New +
             </button>
@@ -38,7 +38,7 @@
                 <td th:text="${student.address}"></td>
                 <td class="text-end">
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                            data-bs-target="#student-modal"
+                            th:attr="data-bs-target='#student-modal' + ${student.studentId}"
                     >
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>
@@ -51,11 +51,15 @@
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
                 </td>
+                <div th:replace="fragments/student :: studentModal"></div>
             </tr>
             </tbody>
         </table>
     </section>
 </main>
+
+<div th:replace="fragments/student :: studentModal"></div>
+
 <div th:replace="fragments/general :: footer"></div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 <div th:replace="fragments/student :: studentScripts"></div>

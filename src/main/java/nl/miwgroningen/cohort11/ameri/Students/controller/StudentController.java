@@ -2,6 +2,7 @@ package nl.miwgroningen.cohort11.ameri.Students.controller;
 
 import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Student;
+import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentController {
     private final StudentRepository studentRepository;
+    private final CohortRepository cohortRepository;
 
     @GetMapping("/new")
     private String showNewStudentForm(Model model) {
@@ -34,13 +36,15 @@ public class StudentController {
         if (!result.hasErrors()) {
             studentRepository.save(student);
         }
-        return "redirect:/";
+        return "redirect:/student";
     }
 
     @GetMapping({"", "/overview"})
     private String showStudentsOverview(Model model){
         List<Student> students = studentRepository.findAll();
         model.addAttribute("students", students);
-        return "studentOverview";
+        model.addAttribute("student", new Student());
+        model.addAttribute("cohorts", cohortRepository.findAll());
+        return "/studentOverview";
     }
 }
