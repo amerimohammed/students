@@ -9,20 +9,52 @@
 
 <main class="container main-content" id="pills-home">
     <h1 class="text-center">Students Overview</h1>
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Address</th>
-        </tr>
-        <tr th:each="student : ${students}">
-            <td th:text="${student.name}"></td>
-            <td th:text="${student.email}"></td>
-            <td th:text="${student.phoneNumber}"></td>
-            <td th:text="${student.address}"></td>
-        </tr>
-    </table>
+    <section>
+        <div class="d-flex mb-3 justify-content-end">
+            <button type="button" class="btn btn-outline-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#student-modal"
+            >
+                New +
+            </button>
+        </div>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Address</th>
+                <th scope="col" class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student : ${students}">
+                <th scope="row" th:text="${student.studentId}"></th>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.phoneNumber}"></td>
+                <td th:text="${student.address}"></td>
+                <td class="text-end">
+                    <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                            data-bs-target="#student-modal"
+                    >
+                        <span th:replace="fragments/icons :: editIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#delete-modal' + ${student.studentId}">
+                        <span th:replace="fragments/icons :: deleteIcon"></span>
+                    </button>
+                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                            data-bs-target="#studentModal">
+                        <span th:replace="fragments/icons :: infoIcon"></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
 </main>
 <div th:replace="fragments/general :: footer"></div>
 <div th:replace="fragments/general :: bottomScripts"></div>
