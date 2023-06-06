@@ -3,6 +3,7 @@ package nl.miwgroningen.cohort11.ameri.Students.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.Id;
 public class Course {
     @Id@GeneratedValue
     private Long courseId;
+    @Column(unique = true)
     private String name;
     private int period;
 

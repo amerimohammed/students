@@ -39,7 +39,7 @@
                 <td th:text="${cohort.course.name}"></td>
                 <td th:text="${cohort.status}"
                     th:classappend="${cohort.status.toString() == 'COMPLETED'} ?
-        'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
+                        'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
                 ></td>
 
                 <td class="text-end">
@@ -61,6 +61,8 @@
                             data-bs-target="#cohortModal">
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
+                </td>
+                <div th:replace="fragments/cohort :: cohortDeleteModal"></div>
             </tr>
             </tbody>
         </table>

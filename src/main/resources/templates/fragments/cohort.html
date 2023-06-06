@@ -52,6 +52,35 @@
     </div>
 </div>
 
+<!-- Delete confirmation Modal -->
+<div class="modal fade" tabindex="-1" aria-labelledby="courseDeleteModal" aria-hidden="true"
+     th:fragment="cohortDeleteModal"
+     th:id="delete-modal + ${cohort.cohortId}"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Delete course</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/cohort/delete/{cohortId}(cohortId=${cohort.cohortId})}"
+                  method="get">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="alert alert-danger" role="alert">
+                            Are you sure you want to delete the course: <b th:text="${cohort.name}"></b>?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div th:fragment="cohortScripts">
     <script th:src="@{/js/cohort.js}"></script>
 </div>

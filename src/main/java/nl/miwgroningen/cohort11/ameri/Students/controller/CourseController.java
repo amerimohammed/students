@@ -3,7 +3,6 @@ package nl.miwgroningen.cohort11.ameri.Students.controller;
 import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Course;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CourseRepository;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Optional;
 
 /**
