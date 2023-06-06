@@ -72,6 +72,35 @@
     </div>
 </div>
 
+<!-- Delete confirmation Modal -->
+<div class="modal fade" tabindex="-1" aria-labelledby="courseDeleteModal" aria-hidden="true"
+     th:fragment="studentDeleteModal"
+     th:id="delete-modal + ${student.studentId}"
+>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Delete Student</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form th:action="@{/student/delete/{studentId}(studentId=${student.studentId})}"
+                  method="get">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="alert alert-danger" role="alert">
+                            Are you sure you want to delete the course: <b th:text="${student.name}"></b>?
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div th:fragment="studentScripts">
     <script th:src="@{/js/student.js}"></script>
 </div>

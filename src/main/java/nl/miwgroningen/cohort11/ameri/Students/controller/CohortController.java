@@ -53,7 +53,7 @@ public class CohortController {
             try {
                 cohortRepository.delete(optionalCohort.get());
             }catch (DataIntegrityViolationException dataIntegrityViolationException){
-                System.out.println(dataIntegrityViolationException);
+                System.out.println(dataIntegrityViolationException.getMessage());
                 model.addAttribute("errorMessage",
                         "This Cohort can't be deleted due to relation to other entities");
                 return "error";
