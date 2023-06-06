@@ -1,11 +1,11 @@
-function updateCourseModalForm(thisButton, courseName, coursePeriod, courseId) {
+function updateCourseModalForm(thisButton) {
 
     const modal = $('#course-modal');
 
     // changing course fields
-    modal.find('#courseName').val(courseName);
-    modal.find('#coursePeriod').val(coursePeriod);
-    modal.find('#courseId').val(courseId);
+    modal.find('#courseName').val(thisButton.getAttribute('course-name'));
+    modal.find('#coursePeriod').val(thisButton.getAttribute('course-period'));
+    modal.find('#courseId').val(thisButton.getAttribute('course-id'));
 
 }
 

@@ -5,14 +5,14 @@ $(document).ready(function () {
 });
 
 /** update the values of the fields when we click on edit button **/
-function updateCohortModalForm(thisButton, cohortId, cohortName, cohortStatus, courseId) {
+function updateCohortModalForm(thisButton) {
 
     const modal = $('#cohort-modal');
 
     // changing cohort fields
-    modal.find('#cohortId').val(cohortId)
-    modal.find('#cohortName').val(cohortName);
-    modal.find('#cohortStatus').val(cohortStatus);
-    modal.find('#cohortCourse').val(courseId);
+    modal.find('#cohortId').val(thisButton.getAttribute('cohort-id'))
+    modal.find('#cohortName').val(thisButton.getAttribute('cohort-name'));
+    modal.find('#cohortStatus').val(thisButton.getAttribute('cohort-status'));
+    modal.find('#cohortCourse').val(thisButton.getAttribute('course-id'));
 
 }

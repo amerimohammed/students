@@ -14,7 +14,10 @@
             <button type="button" class="btn btn-outline-success"
                     data-bs-toggle="modal"
                     data-bs-target="#course-modal"
-                    th:onclick="updateCourseModalForm(this,'', '', '')"
+                    course-name=""
+                    course-period=""
+                    course-id=""
+                    onclick="updateCourseModalForm(this)"
             >
                 New +
             </button>
@@ -39,11 +42,7 @@
                             th:course-name="${course.name}"
                             th:course-period="${course.period}"
                             th:course-id="${course.courseId}"
-                            th:onclick="updateCourseModalForm(this,
-                                this.getAttribute('course-name'),
-                                 this.getAttribute('course-period'),
-                                 this.getAttribute('course-id'),
-                            )"
+                            onclick="updateCourseModalForm(this)"
                     >
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>

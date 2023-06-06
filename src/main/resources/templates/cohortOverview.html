@@ -13,8 +13,11 @@
             <button type="button" class="btn btn-outline-success"
                     data-bs-toggle="modal"
                     data-bs-target="#cohort-modal"
-                    th:default-course="${courses.get(0).courseId}"
-                    onclick="updateCohortModalForm(this,'', '', 'PREPARED', this.getAttribute('default-course'))"
+                    cohort-id=""
+                    cohort-name=""
+                    cohort-status="PREPARED"
+                    th:course-id="${courses.get(0).courseId}"
+                    onclick="updateCohortModalForm(this)"
             >
                 New +
             </button>
@@ -46,12 +49,7 @@
                             th:cohort-name="${cohort.name}"
                             th:cohort-status="${cohort.status}"
                             th:course-id="${cohort.course.courseId}"
-                            onclick="updateCohortModalForm(this,
-                                this.getAttribute('cohort-id'),
-                                this.getAttribute('cohort-name'),
-                                this.getAttribute('cohort-status'),
-                                this.getAttribute('course-id'),
-                            )"
+                            onclick="updateCohortModalForm(this)"
                     >
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>
