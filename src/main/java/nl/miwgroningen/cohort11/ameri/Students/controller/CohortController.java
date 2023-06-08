@@ -49,10 +49,10 @@ public class CohortController {
     private String deleteCohort(@PathVariable("cohortId") Long cohortId, Model model) {
         Optional<Cohort> optionalCohort = cohortRepository.findById(cohortId);
 
-        if(optionalCohort.isPresent()){
+        if (optionalCohort.isPresent()) {
             try {
                 cohortRepository.delete(optionalCohort.get());
-            }catch (DataIntegrityViolationException dataIntegrityViolationException){
+            } catch (DataIntegrityViolationException dataIntegrityViolationException) {
                 System.out.println(dataIntegrityViolationException.getMessage());
                 model.addAttribute("errorMessage",
                         "This Cohort can't be deleted due to relation to other entities");

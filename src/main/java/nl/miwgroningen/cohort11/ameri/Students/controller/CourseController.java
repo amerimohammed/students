@@ -16,7 +16,7 @@ import java.util.Optional;
 
 /**
  * @author Mohammed Alameri on 01/06/2023.
- * @project handles all the course pages and requests
+ * handles all the course pages and requests
  */
 @Controller
 @RequiredArgsConstructor

@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Mohammed Alameri on 07/06/2023.
@@ -29,17 +30,19 @@ public class User implements UserDetails {
 
     private String password;
 
-    private Boolean administrator = false;
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Role> roles;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
-        authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorityList.add(new SimpleGrantedAuthority(RoleType.USER.toString()));
 
-        if(administrator){
-            authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN") );
+        for (Role role : roles) {
+            authorityList.add(new SimpleGrantedAuthority(role.getRoleType().toString()));
         }
+        System.out.println(authorityList);
         return authorityList;
     }
 

@@ -40,7 +40,7 @@ public class StudentController {
     }
 
     @GetMapping({"", "/overview"})
-    private String showStudentsOverview(Model model){
+    private String showStudentsOverview(Model model) {
         List<Student> students = studentRepository.findAll();
         model.addAttribute("students", students);
         model.addAttribute("student", new Student());
@@ -52,10 +52,10 @@ public class StudentController {
     private String deleteCohort(@PathVariable("studentId") Long studentId, Model model) {
         Optional<Student> optionalStudent = studentRepository.findById(studentId);
 
-        if(optionalStudent.isPresent()){
+        if (optionalStudent.isPresent()) {
             try {
                 studentRepository.delete(optionalStudent.get());
-            }catch (DataIntegrityViolationException dataIntegrityViolationException){
+            } catch (DataIntegrityViolationException dataIntegrityViolationException) {
                 System.out.println(dataIntegrityViolationException.getMessage());
                 model.addAttribute("errorMessage",
                         "This Student can't be deleted due to relation to other entities");

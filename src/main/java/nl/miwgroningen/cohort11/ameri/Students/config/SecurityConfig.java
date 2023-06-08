@@ -1,6 +1,7 @@
 package nl.miwgroningen.cohort11.ameri.Students.config;
 
 import lombok.RequiredArgsConstructor;
+import nl.miwgroningen.cohort11.ameri.Students.model.RoleType;
 import nl.miwgroningen.cohort11.ameri.Students.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,9 +42,10 @@ public class SecurityConfig {
         httpSecurity.authorizeRequests((authorize) -> authorize
                 .antMatchers("/css/**", "/webjars/**").permitAll()
                 .antMatchers("/", "/cohort").permitAll()
-                .antMatchers(HttpMethod.POST,"/student").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/student").hasAuthority(RoleType.ADMIN.toString())
                 .anyRequest().authenticated()
-        ).formLogin().and().logout().logoutSuccessUrl("/");
+        ).formLogin()
+                .and().logout().logoutSuccessUrl("/");
 
         return httpSecurity.build();
     }
