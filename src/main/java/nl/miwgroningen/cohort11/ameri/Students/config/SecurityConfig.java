@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author Mohammed Alameri on 07/06/2023.
- * @project handles access restrictions to the application pages
+ * handles access restrictions to the application pages
  */
 @Configuration
 @EnableWebSecurity
@@ -40,6 +41,7 @@ public class SecurityConfig {
         httpSecurity.authorizeRequests((authorize) -> authorize
                 .antMatchers("/css/**", "/webjars/**").permitAll()
                 .antMatchers("/", "/cohort").permitAll()
+                .antMatchers(HttpMethod.POST,"/student").hasRole("ADMIN")
                 .anyRequest().authenticated()
         ).formLogin().and().logout().logoutSuccessUrl("/");
 

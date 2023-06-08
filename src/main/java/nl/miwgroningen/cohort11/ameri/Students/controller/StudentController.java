@@ -1,7 +1,6 @@
 package nl.miwgroningen.cohort11.ameri.Students.controller;
 
 import lombok.RequiredArgsConstructor;
-import nl.miwgroningen.cohort11.ameri.Students.model.Cohort;
 import nl.miwgroningen.cohort11.ameri.Students.model.Student;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
@@ -16,11 +15,12 @@ import java.util.Optional;
 
 /**
  * @author Mohammed Alameri on 31/05/2023.
- * @project handles user interaction with student pages
+ * handles user interaction with student pages
  */
-@RequestMapping("/student")
+
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/student")
 public class StudentController {
     private final StudentRepository studentRepository;
     private final CohortRepository cohortRepository;

@@ -29,11 +29,17 @@ public class User implements UserDetails {
 
     private String password;
 
+    private Boolean administrator = false;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
+        List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
         authorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
+
+        if(administrator){
+            authorityList.add(new SimpleGrantedAuthority("ROLE_ADMIN") );
+        }
         return authorityList;
     }
 
