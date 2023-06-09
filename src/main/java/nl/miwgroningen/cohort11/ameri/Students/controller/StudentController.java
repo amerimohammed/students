@@ -5,6 +5,7 @@ import nl.miwgroningen.cohort11.ameri.Students.model.Student;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ import java.util.Optional;
 public class StudentController {
     private final StudentRepository studentRepository;
     private final CohortRepository cohortRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/new")
     private String showNewStudentForm(Model model) {
@@ -34,6 +36,8 @@ public class StudentController {
     @PostMapping("")
     private String saveOrUpdateStudent(@ModelAttribute Student student, BindingResult result) {
         if (!result.hasErrors()) {
+            student.setUsername("malameri");
+            student.setPassword(passwordEncoder.encode("test"));
             studentRepository.save(student);
         }
         return "redirect:/student";
@@ -48,9 +52,9 @@ public class StudentController {
         return "/studentOverview";
     }
 
-    @GetMapping("/delete/{studentId}")
-    private String deleteCohort(@PathVariable("studentId") Long studentId, Model model) {
-        Optional<Student> optionalStudent = studentRepository.findById(studentId);
+    @GetMapping("/delete/{userId}")
+    private String deleteCohort(@PathVariable("userId") Long userId, Model model) {
+        Optional<Student> optionalStudent = studentRepository.findById(userId);
 
         if (optionalStudent.isPresent()) {
             try {

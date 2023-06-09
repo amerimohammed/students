@@ -9,7 +9,7 @@
 <!--New/Edit Student Modal-->
 <div class="modal fade" tabindex="-1" aria-labelledby="cohortModal" aria-hidden="true"
      th:fragment="studentModal"
-     th:id="student-modal + ${student.studentId}"
+     th:id="student-modal + ${student.userId}"
 >
     <div class="modal-dialog">
         <div class="modal-content">
@@ -18,7 +18,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form th:action="@{/student}" method="post" th:object="${student}">
-                <input type="hidden" th:value="${student.studentId}" id="studentId" name="studentId"/>
+                <input type="hidden" th:value="${student.userId}" id="userId" name="userId"/>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="studentName" class="col-form-label">Student Name:</label>
@@ -75,7 +75,7 @@
 <!-- Delete confirmation Modal -->
 <div class="modal fade" tabindex="-1" aria-labelledby="courseDeleteModal" aria-hidden="true"
      th:fragment="studentDeleteModal"
-     th:id="delete-modal + ${student.studentId}"
+     th:id="delete-modal + ${student.userId}"
 >
     <div class="modal-dialog">
         <div class="modal-content">
@@ -83,7 +83,7 @@
                 <h1 class="modal-title fs-5">Delete Student</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/student/delete/{studentId}(studentId=${student.studentId})}"
+            <form th:action="@{/student/delete/{userId}(userId=${student.userId})}"
                   method="get">
                 <div class="modal-body">
                     <div class="mb-3">

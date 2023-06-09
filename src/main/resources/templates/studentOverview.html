@@ -13,7 +13,7 @@
         <div class="d-flex mb-3 justify-content-end">
             <button type="button" class="btn btn-outline-success"
                     data-bs-toggle="modal"
-                    th:attr="data-bs-target='#student-modal' + ${student.studentId}"
+                    th:attr="data-bs-target='#student-modal' + ${student.userId}"
             >
                 New +
             </button>
@@ -31,19 +31,19 @@
             </thead>
             <tbody>
             <tr th:each="student : ${students}">
-                <th scope="row" th:text="${student.studentId}"></th>
+                <th scope="row" th:text="${student.userId}"></th>
                 <td th:text="${student.name}"></td>
                 <td th:text="${student.email}"></td>
                 <td th:text="${student.phoneNumber}"></td>
                 <td th:text="${student.address}"></td>
                 <td class="text-end">
                     <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                            th:attr="data-bs-target='#student-modal' + ${student.studentId}"
+                            th:attr="data-bs-target='#student-modal' + ${student.userId}"
                     >
                         <span th:replace="fragments/icons :: editIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-                            th:attr="data-bs-target='#delete-modal' + ${student.studentId}">
+                            th:attr="data-bs-target='#delete-modal' + ${student.userId}">
                         <span th:replace="fragments/icons :: deleteIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
