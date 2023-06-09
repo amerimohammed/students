@@ -14,7 +14,7 @@ import java.util.Optional;
 
 /**
  * @author Mohammed Alameri on 31/05/2023.
- * @project Manages all user requests and interactions with Cohort pages
+ * Manages all user requests and interactions with Cohort pages
  */
 @RequestMapping("/cohort")
 @Controller
@@ -29,12 +29,6 @@ public class CohortController {
         model.addAttribute("courses", courseRepository.findAll());
         model.addAttribute("cohort", new Cohort());
         return "cohortOverview";
-    }
-
-    @GetMapping("/new")
-    private String ShowCohortNewEditForm(Model model) {
-        model.addAttribute("cohort", new Cohort());
-        return "cohortNewEditForm";
     }
 
     @PostMapping("")

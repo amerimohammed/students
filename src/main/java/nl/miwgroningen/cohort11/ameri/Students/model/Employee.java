@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Mohammed Alameri on 09/06/2023.
@@ -18,5 +19,5 @@ public class Employee extends User{
     private String job;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Cohort> cohorts;
+    private Set<Cohort> cohorts = new HashSet<>();
 }

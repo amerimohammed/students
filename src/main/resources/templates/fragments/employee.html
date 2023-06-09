@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Student Fragments</title>
+    <title>Employee Fragments</title>
 </head>
 <body>
 
-<!--New/Edit Student Modal-->
+<!--New/Edit Employee Modal-->
 <div class="modal fade" tabindex="-1" aria-labelledby="cohortModal" aria-hidden="true"
-     th:fragment="studentModal"
-     th:id="student-modal + ${student.userId}"
+     th:fragment="employeeModal"
+     th:id="employee-modal + ${employee.userId}"
 >
     <div class="modal-dialog">
         <div class="modal-content">
@@ -17,50 +17,50 @@
                 <h1 class="modal-title fs-5" id="new-edit-cohort">New/Edit Employee</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/student}" method="post" th:object="${student}">
-                <input type="hidden" th:value="${student.userId}" id="userId" name="userId"/>
+            <form th:action="@{/employee}" method="post" th:object="${employee}">
+                <input type="hidden" th:value="${employee.userId}" id="userId" name="userId"/>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="studentName" class="col-form-label">Student Name:</label>
-                        <input type="text" class="form-control" id="studentName"
+                        <label for="employeeName" class="col-form-label">Employee Name:</label>
+                        <input type="text" class="form-control" id="employeeName"
                                placeholder="example: John Doe"
-                               th:value="${student.name}"
+                               th:value="${employee.name}"
                                name="name"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="studentEmail" class="col-form-label">Student Email:</label>
-                        <input type="text" class="form-control" id="studentEmail"
+                        <label for="employeeEmail" class="col-form-label">Employee Email:</label>
+                        <input type="text" class="form-control" id="employeeEmail"
                                placeholder="email@example.com"
-                               th:value="${student.email}"
+                               th:value="${employee.email}"
                                name="email"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="studentPhoneNumber" class="col-form-label">Student Phone:</label>
-                        <input type="text" class="form-control" id="studentPhoneNumber"
+                        <label for="employeePhoneNumber" class="col-form-label">Employee Phone:</label>
+                        <input type="text" class="form-control" id="employeePhoneNumber"
                                placeholder="0611111111"
-                               th:value="${student.phoneNumber}"
+                               th:value="${employee.phoneNumber}"
                                name="phoneNumber"
                         >
                     </div>
                     <div class="mb-3">
-                        <label for="studentAddress" class="col-form-label">Student Address:</label>
-                        <input type="text" class="form-control" id="studentAddress"
+                        <label for="employeeAddress" class="col-form-label">Employee Address:</label>
+                        <input type="text" class="form-control" id="employeeAddress"
                                placeholder="Paterswoldeweg 122"
-                               th:value="${student.address}"
+                               th:value="${employee.address}"
                                name="address"
                         >
                     </div>
-                    <div class="mb-3">
-                        <label for="studentCohort" class="col-form-label">Cohort:</label>
-                        <select class="form-select" id="studentCohort" name="cohort">
-                            <option th:each="cohort : ${cohorts}" th:value="${cohort.cohortId}"
-                                    th:text="${cohort.name}"
-                                    th:selected="${student.cohort == null ? false : (student.cohort.cohortId == cohort.cohortId)}">
-                            </option>
-                        </select>
-                    </div>
+<!--                    <div class="mb-3">-->
+<!--                        <label for="employeeCohort" class="col-form-label">Cohort:</label>-->
+<!--                        <select class="form-select" id="employeeCohort" name="cohort">-->
+<!--                            <option th:each="cohort : ${cohorts}" th:value="${cohort.cohortId}"-->
+<!--                                    th:text="${cohort.name}"-->
+<!--                                    th:selected="${employee.cohort == null ? false : (employee.cohort.cohortId == cohort.cohortId)}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
 
                 </div>
                 <div class="modal-footer">
@@ -74,21 +74,21 @@
 
 <!-- Delete confirmation Modal -->
 <div class="modal fade" tabindex="-1" aria-labelledby="courseDeleteModal" aria-hidden="true"
-     th:fragment="studentDeleteModal"
-     th:id="delete-modal + ${student.userId}"
+     th:fragment="employeeDeleteModal"
+     th:id="delete-modal + ${employee.userId}"
 >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">Delete Student</h1>
+                <h1 class="modal-title fs-5">Delete Employee</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form th:action="@{/student/delete/{userId}(userId=${student.userId})}"
+            <form th:action="@{/employee/delete/{userId}(userId=${employee.userId})}"
                   method="get">
                 <div class="modal-body">
                     <div class="mb-3">
                         <div class="alert alert-danger" role="alert">
-                            Are you sure you want to delete the course: <b th:text="${student.name}"></b>?
+                            Are you sure you want to delete the course: <b th:text="${employee.name}"></b>?
                         </div>
                     </div>
                 </div>
@@ -101,8 +101,8 @@
     </div>
 </div>
 
-<div th:fragment="studentScripts">
-    <script th:src="@{/js/student.js}"></script>
+<div th:fragment="employeeScripts">
+    <script th:src="@{/js/employee.js}"></script>
 </div>
 </body>
 </html>

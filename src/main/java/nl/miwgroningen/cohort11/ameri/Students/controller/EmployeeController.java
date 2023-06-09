@@ -1,8 +1,10 @@
 package nl.miwgroningen.cohort11.ameri.Students.controller;
 
 import lombok.RequiredArgsConstructor;
+import nl.miwgroningen.cohort11.ameri.Students.model.Employee;
 import nl.miwgroningen.cohort11.ameri.Students.model.Student;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
+import nl.miwgroningen.cohort11.ameri.Students.repository.EmployeeRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,45 +23,45 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/student")
-public class StudentController {
-    private final StudentRepository studentRepository;
+@RequestMapping("/employee")
+public class EmployeeController {
+    private final EmployeeRepository employeeRepository;
     private final CohortRepository cohortRepository;
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("")
-    private String saveOrUpdateStudent(@ModelAttribute Student student, BindingResult result) {
+    private String saveOrUpdateEmployee(@ModelAttribute Employee employee, BindingResult result) {
         if (!result.hasErrors()) {
-            student.setUsername("malameri");
-            student.setPassword(passwordEncoder.encode("test"));
-            studentRepository.save(student);
+            employee.setUsername("daan");
+            employee.setPassword(passwordEncoder.encode("test"));
+            employeeRepository.save(employee);
         }
-        return "redirect:/student";
+        return "redirect:/employee";
     }
 
     @GetMapping({"", "/overview"})
-    private String showStudentsOverview(Model model) {
-        List<Student> students = studentRepository.findAll();
-        model.addAttribute("students", students);
-        model.addAttribute("student", new Student());
+    private String showEmployeesOverview(Model model) {
+        List<Employee> employees = employeeRepository.findAll();
+        model.addAttribute("employees", employees);
+        model.addAttribute("employee", new Employee());
         model.addAttribute("cohorts", cohortRepository.findAll());
-        return "/studentOverview";
+        return "employeeOverview";
     }
 
     @GetMapping("/delete/{userId}")
     private String deleteCohort(@PathVariable("userId") Long userId, Model model) {
-        Optional<Student> optionalStudent = studentRepository.findById(userId);
+        Optional<Employee> optionalEmployee = employeeRepository.findById(userId);
 
-        if (optionalStudent.isPresent()) {
+        if (optionalEmployee.isPresent()) {
             try {
-                studentRepository.delete(optionalStudent.get());
+                employeeRepository.delete(optionalEmployee.get());
             } catch (DataIntegrityViolationException dataIntegrityViolationException) {
                 System.out.println(dataIntegrityViolationException.getMessage());
                 model.addAttribute("errorMessage",
-                        "This Student can't be deleted due to relation to other entities");
+                        "This Employee can't be deleted due to relation to other entities");
                 return "error";
             }
         }
-        return "redirect:/student";
+        return "redirect:/employee";
     }
 }
