@@ -14,10 +14,11 @@ import java.util.Set;
 
 /**
  * @author Mohammed Alameri on 07/06/2023.
- * @project a peron who has a user account to log in to our application
+ * a peron who has a user account to log in to our application
  */
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Setter
 @Getter
 public class User implements UserDetails {
@@ -30,6 +31,11 @@ public class User implements UserDetails {
 
     private String password;
 
+    private String name;
+    private String email;
+    private String phoneNumber;
+    private String address;
+
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
     @Override
@@ -37,11 +43,10 @@ public class User implements UserDetails {
 
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
-        authorityList.add(new SimpleGrantedAuthority(RoleType.USER.toString()));
-
         for (Role role : roles) {
             authorityList.add(new SimpleGrantedAuthority(role.getRoleType().toString()));
         }
+
         System.out.println(authorityList);
         return authorityList;
     }

@@ -10,19 +10,12 @@ import javax.persistence.ManyToOne;
 
 /**
  * @author Mohammed Alameri on 31/05/2023.
- * @project attributes of the student
+ * attributes of the student
  */
 @Entity
 @Getter
 @Setter
-public class Student {
-    @Id
-    @GeneratedValue
-    private Long studentId;
-    private String name;
-    private String email;
-    private String phoneNumber;
-    private String address;
+public class Student extends User {
     @ManyToOne
     private Cohort cohort;
 }

@@ -11,11 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Mohammed Alameri on 07/06/2023.
- * @project Creating admin account for the first time the application initialized
+ * Creating admin account for the first time the application initialized
  */
 
 @SpringBootApplication
@@ -23,26 +25,23 @@ import java.util.Set;
 public class KickStarter implements CommandLineRunner {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final RoleRepository roleRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         if (userRepository.findByUsername("admin").isEmpty()) {
 
             User admin = new User();
             admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("admin"));
 
-            for (RoleType roleType : RoleType.values()){
+            Set<Role> adminRoles = new HashSet<>();
+
+            for (RoleType roleType : RoleType.values()) {
                 Role role = new Role();
                 role.setRoleType(roleType);
-                roleRepository.save(role);
+                adminRoles.add(role);
             }
 
-            Role adminRole = new Role();
-            adminRole.setRoleType(RoleType.ADMIN);
-            Set<Role> adminRoles = new HashSet<>();
-            adminRoles.add(adminRole);
             admin.setRoles(adminRoles);
             userRepository.save(admin);
 
@@ -54,6 +53,12 @@ public class KickStarter implements CommandLineRunner {
             System.err.println("admin with password admin has been created. Remember to change the password");
         } else {
             System.err.println("Admin already exists nothing to do here");
+            String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char) i)).collect(Collectors.joining());
+            System.out.println(password);
+            String email = "mark1!@gmail.com";
+            System.out.println(email.substring(0, email.indexOf('@')));
+
         }
     }
+
 }
