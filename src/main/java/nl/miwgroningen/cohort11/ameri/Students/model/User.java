@@ -5,12 +5,12 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Mohammed Alameri on 07/06/2023.
@@ -38,6 +38,7 @@ public class User implements UserDetails {
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Role> roles;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
@@ -69,5 +70,17 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public void generateUsernameAndPassword() {
+        password = new Random().ints(10, 33, 122)
+                .mapToObj(i -> String.valueOf((char) i)).collect(Collectors.joining());
+
+        username = this.email.substring(0, email.indexOf('@'));
+    }
+
+    public void hashPassword() {
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        password = encoder.encode(password);
     }
 }

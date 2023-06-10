@@ -2,12 +2,10 @@ package nl.miwgroningen.cohort11.ameri.Students.controller;
 
 import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Employee;
-import nl.miwgroningen.cohort11.ameri.Students.model.Student;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.EmployeeRepository;
-import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
+import nl.miwgroningen.cohort11.ameri.Students.service.EmailService;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,14 +25,30 @@ import java.util.Optional;
 public class EmployeeController {
     private final EmployeeRepository employeeRepository;
     private final CohortRepository cohortRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @PostMapping("")
     private String saveOrUpdateEmployee(@ModelAttribute Employee employee, BindingResult result) {
         if (!result.hasErrors()) {
-            employee.setUsername("daan");
-            employee.setPassword(passwordEncoder.encode("test"));
-            employeeRepository.save(employee);
+            if (employee.getUserId() == null) {
+                employee.generateUsernameAndPassword();
+                String tempPassword = employee.getPassword();
+                employee.hashPassword();
+                employeeRepository.save(employee);
+                emailService.sendSimpleMessage("noreply@academy.nl", employee.getEmail(),
+                        "Account created",
+                        String.format("Your account has been created.\nYou can log in now using:\n" +
+                                        "Username: %s\nPassword: %s\nYou can change your password using profile page."
+                                , employee.getUsername(), tempPassword
+                        ));
+            } else {
+                Optional<Employee> storedEmployee = employeeRepository.findById(employee.getUserId());
+                if (storedEmployee.isPresent()) {
+                    employee.setUsername(storedEmployee.get().getUsername());
+                    employee.setPassword(storedEmployee.get().getPassword());
+                    employeeRepository.save(employee);
+                }
+            }
         }
         return "redirect:/employee";
     }

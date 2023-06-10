@@ -3,6 +3,7 @@ package nl.miwgroningen.cohort11.ameri.Students.controller;
 import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Course;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CourseRepository;
+import nl.miwgroningen.cohort11.ameri.Students.service.EmailService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +23,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CourseController {
     private final CourseRepository courseRepository;
-
     @GetMapping({"/", "/course/overview"})
     private String showCourseOverview(Model model) {
         model.addAttribute("courses", courseRepository.findAll());

@@ -53,10 +53,6 @@ public class KickStarter implements CommandLineRunner {
             System.err.println("admin with password admin has been created. Remember to change the password");
         } else {
             System.err.println("Admin already exists nothing to do here");
-            String password = new Random().ints(10, 33, 122).mapToObj(i -> String.valueOf((char) i)).collect(Collectors.joining());
-            System.out.println(password);
-            String email = "mark1!@gmail.com";
-            System.out.println(email.substring(0, email.indexOf('@')));
 
         }
     }

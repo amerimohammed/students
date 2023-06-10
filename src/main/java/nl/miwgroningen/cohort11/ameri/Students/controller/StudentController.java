@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import nl.miwgroningen.cohort11.ameri.Students.model.Student;
 import nl.miwgroningen.cohort11.ameri.Students.repository.CohortRepository;
 import nl.miwgroningen.cohort11.ameri.Students.repository.StudentRepository;
+import nl.miwgroningen.cohort11.ameri.Students.service.EmailService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -25,14 +26,30 @@ import java.util.Optional;
 public class StudentController {
     private final StudentRepository studentRepository;
     private final CohortRepository cohortRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @PostMapping("")
     private String saveOrUpdateStudent(@ModelAttribute Student student, BindingResult result) {
         if (!result.hasErrors()) {
-            student.setUsername("malameri");
-            student.setPassword(passwordEncoder.encode("test"));
-            studentRepository.save(student);
+            if (student.getUserId() == null) {
+                student.generateUsernameAndPassword();
+                String tempPassword = student.getPassword();
+                student.hashPassword();
+                studentRepository.save(student);
+                emailService.sendSimpleMessage("noreply@academy.nl", student.getEmail(),
+                        "Account created",
+                        String.format("Your account has been created.\nYou can log in now using:\n" +
+                                        "Username: %s\nPassword: %s\nYou can change your password using profile page."
+                                , student.getUsername(), tempPassword
+                        ));
+            } else {
+                Optional<Student> storedStudent = studentRepository.findById(student.getUserId());
+                if (storedStudent.isPresent()) {
+                    student.setUsername(storedStudent.get().getUsername());
+                    student.setPassword(storedStudent.get().getPassword());
+                    studentRepository.save(student);
+                }
+            }
         }
         return "redirect:/student";
     }
