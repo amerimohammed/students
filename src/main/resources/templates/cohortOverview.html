@@ -36,7 +36,13 @@
             <tr th:each="cohort : ${cohorts}">
                 <th scope="row" th:text="${cohort.cohortId}"></th>
                 <td th:text="${cohort.name}"></td>
-                <td th:text="${cohort.course.name}"></td>
+                <td>
+                    <span style="position: relative; padding-right: 10px">
+                    <span th:text="${cohort.course.name}"></span><span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary"
+                        th:text="${cohort.students.size()}"></span>
+                    </span>
+                </td>
                 <td th:text="${cohort.status}"
                     th:classappend="${cohort.status.toString() == 'COMPLETED'} ?
                         'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
@@ -58,11 +64,17 @@
                         <span th:replace="fragments/icons :: deleteIcon"></span>
                     </button>
                     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                            data-bs-target="#cohortModal">
+                            data-bs-target="#cohortModal"
+                            th:attr="data-bs-target='#cohort-details' + ${cohort.cohortId}"
+                    >
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
                 </td>
+
                 <div th:replace="fragments/cohort :: cohortDeleteModal"></div>
+
+                <div th:replace="fragments/cohort :: cohortDetails"></div>
+
             </tr>
             </tbody>
         </table>

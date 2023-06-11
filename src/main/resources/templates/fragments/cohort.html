@@ -81,6 +81,59 @@
     </div>
 </div>
 
+<!-- Full screen modal for cohort details -->
+<div class="modal fade" th:fragment="cohortDetails" th:id="cohort-details + ${cohort.cohortId}"
+     tabindex="-1" aria-labelledby="courseDetails" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="exampleModalFullscreenLabel" th:text="${cohort.name}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <span>Name of the cohort: </span>
+                            <h3 th:text="${cohort.name}"></h3>
+                            <span>Course of the cohort: </span>
+                            <h3><span th:text="${cohort.course.name}"></span> month/s</h3>
+                            <span>Status of this Cohort: </span>
+                            <h3>
+                                <span th:text="${cohort.status}"
+                                      th:classappend="${cohort.status.toString() == 'COMPLETED'} ?
+                        'text-success' : (${cohort.status.toString() == 'RUNNING'} ? 'text-info' : 'text-warning')"
+                                >
+
+                                </span>
+                            </h3>
+                        </div>
+                        <div class="col">
+                            <span>Students of the cohort: </span>
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action active" aria-current="true"
+                                   th:each="student : ${cohort.students}"
+                                >
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 class="mb-1" th:text="${student.name}"></h5>
+                                        <small th:text="${student.username}"></small>
+                                    </div>
+                                    <p class="mb-1" th:text="${student.email}"></p>
+                                    <small th:text="${student.phoneNumber}"></small>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div th:fragment="cohortScripts">
     <script th:src="@{/js/cohort.js}"></script>
 </div>

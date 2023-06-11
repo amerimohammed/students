@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Mohammed Alameri on 31/05/2023.
@@ -24,4 +26,7 @@ public class Cohort {
 
     @ManyToOne
     private Course course;
+
+    @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL)
+    private List<Student> students = new ArrayList<>();
 }
