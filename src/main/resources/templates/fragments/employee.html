@@ -52,15 +52,25 @@
                                name="address"
                         >
                     </div>
-<!--                    <div class="mb-3">-->
-<!--                        <label for="employeeCohort" class="col-form-label">Cohort:</label>-->
-<!--                        <select class="form-select" id="employeeCohort" name="cohort">-->
-<!--                            <option th:each="cohort : ${cohorts}" th:value="${cohort.cohortId}"-->
-<!--                                    th:text="${cohort.name}"-->
-<!--                                    th:selected="${employee.cohort == null ? false : (employee.cohort.cohortId == cohort.cohortId)}">-->
-<!--                            </option>-->
-<!--                        </select>-->
-<!--                    </div>-->
+                    <div class="mb-3">
+                        <label for="employeeCohort" class="col-form-label">Cohorts:</label>
+                        <select class="form-select" id="employeeCohort" name="cohorts" multiple>
+                            <option th:each="cohort : ${allCohorts}" th:value="${cohort.cohortId}"
+                                    th:text="${cohort.name}"
+                                    th:selected="${employee.cohorts.contains(cohort)}"
+                            >
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="col-form-label" for="userRoles">Roles:</label>
+                        <input type="checkbox" name="roles" id="userRoles"
+                               th:each="roleOpt : ${T(nl.miwgroningen.cohort11.ameri.Students.model.RoleType).values()}"
+                               th:value="${roleOpt}"
+                               th:text="${roleOpt}"
+                        />
+                        <div>Currently assigned: <span class="role-label" th:each="role : ${employee.roles}" th:text="${role.roleType} " ></span></div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">

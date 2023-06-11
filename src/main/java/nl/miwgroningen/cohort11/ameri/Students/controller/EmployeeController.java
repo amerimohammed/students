@@ -58,7 +58,7 @@ public class EmployeeController {
         List<Employee> employees = employeeRepository.findAll();
         model.addAttribute("employees", employees);
         model.addAttribute("employee", new Employee());
-        model.addAttribute("cohorts", cohortRepository.findAll());
+        model.addAttribute("allCohorts", cohortRepository.findAll());
         return "employeeOverview";
     }
 

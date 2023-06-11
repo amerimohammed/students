@@ -43,7 +43,7 @@ public class SecurityConfig {
                 .antMatchers("/css/**", "/webjars/**").permitAll()
                 .antMatchers("/", "/cohort").permitAll()
                 .antMatchers(HttpMethod.POST,"/student").hasAuthority(RoleType.ADMIN.toString())
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
         ).formLogin()
                 .and().logout().logoutSuccessUrl("/");
 
