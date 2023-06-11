@@ -27,7 +27,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Period</th>
+                <th scope="col">Duration</th>
                 <th scope="col" class="text-end">Actions</th>
             </tr>
             </thead>
@@ -50,12 +50,17 @@
                             th:attr="data-bs-target='#delete-modal' + ${course.courseId}">
                         <span th:replace="fragments/icons :: deleteIcon"></span>
                     </button>
-                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#courseModal">
+                    <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+                            th:attr="data-bs-target='#course-details' + ${course.courseId}"
+                            data-bs-title="This top tooltip is themed via CSS variables."
+                    >
                         <span th:replace="fragments/icons :: infoIcon"></span>
                     </button>
                 </td>
 
                 <div th:replace="fragments/course :: courseDeleteModal(${course})"></div>
+
+                <div th:replace="fragments/course :: courseDetails"></div>
 
             </tr>
             </tbody>
@@ -64,7 +69,6 @@
 </main>
 
 <div th:replace="fragments/course :: courseModal(${course})"></div>
-
 <div th:replace="fragments/general :: footer"></div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 <div th:replace="fragments/course :: courseScripts"></div>

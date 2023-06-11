@@ -74,6 +74,85 @@
     </div>
 </div>
 
+<!-- Full screen modal for course details -->
+<div class="modal fade"  th:fragment="courseDetails" th:id="course-details + ${course.courseId}"
+     tabindex="-1" aria-labelledby="courseDetails" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="exampleModalFullscreenLabel" th:text="${course.name}"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <span>Name of the course: </span>
+                            <h3 th:text="${course.name}"></h3>
+                            <span>Duration of the course: </span>
+                            <h3><span th:text="${course.period}"></span> month/s</h3>
+                        </div>
+                        <div class="col">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Programming
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Suspendisse condimentum dictum erat, et efficitur sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque risus felis, ornare sed arcu nec, vestibulum dignissim risus. Phasellus dapibus dui lorem, quis aliquet magna finibus sodales. Nam auctor dignissim ligula. Duis tincidunt turpis massa, vel feugiat leo tempor in. Vestibulum tristique placerat ante nec posuere. Praesent tincidunt quis eros sit amet pulvinar.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Databases
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Suspendisse condimentum dictum erat, et efficitur sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque risus felis, ornare sed arcu nec, vestibulum dignissim risus. Phasellus dapibus dui lorem, quis aliquet magna finibus sodales. Nam auctor dignissim ligula. Duis tincidunt turpis massa, vel feugiat leo tempor in. Vestibulum tristique placerat ante nec posuere. Praesent tincidunt quis eros sit amet pulvinar.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Soft Skills
+                                        </button>
+                                    </h2>
+                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Suspendisse condimentum dictum erat, et efficitur sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque risus felis, ornare sed arcu nec, vestibulum dignissim risus. Phasellus dapibus dui lorem, quis aliquet magna finibus sodales. Nam auctor dignissim ligula. Duis tincidunt turpis massa, vel feugiat leo tempor in. Vestibulum tristique placerat ante nec posuere. Praesent tincidunt quis eros sit amet pulvinar.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                            Final Project
+                                        </button>
+                                    </h2>
+                                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong> Suspendisse condimentum dictum erat, et efficitur sapien. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque risus felis, ornare sed arcu nec, vestibulum dignissim risus. Phasellus dapibus dui lorem, quis aliquet magna finibus sodales. Nam auctor dignissim ligula. Duis tincidunt turpis massa, vel feugiat leo tempor in. Vestibulum tristique placerat ante nec posuere. Praesent tincidunt quis eros sit amet pulvinar.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:fragment="courseScripts">
     <script th:src="@{/js/course.js}"></script>
