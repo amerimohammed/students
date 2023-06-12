@@ -40,12 +40,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests((authorize) -> authorize
-                .antMatchers("/css/**", "/webjars/**").permitAll()
-                .antMatchers("/", "/cohort").permitAll()
-                .antMatchers(HttpMethod.POST,"/student").hasAuthority(RoleType.ADMIN.toString())
-                .anyRequest().permitAll()
-        ).formLogin()
-                .and().logout().logoutSuccessUrl("/");
+                        .antMatchers("/css/**","/js/**", "/webjars/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/").permitAll()
+                        .antMatchers(HttpMethod.GET, "/cohort")
+                        .hasAnyAuthority(RoleType.ADMIN.toString(), RoleType.VIEWER.toString())
+                        .antMatchers("/profile").authenticated()
+                        .anyRequest().hasAuthority(RoleType.ADMIN.toString())
+                ).formLogin().permitAll()
+                .and().logout().permitAll()
+                .logoutSuccessUrl("/");
 
         return httpSecurity.build();
     }

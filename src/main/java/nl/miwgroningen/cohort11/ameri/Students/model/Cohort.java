@@ -27,6 +27,6 @@ public class Cohort {
     @ManyToOne
     private Course course;
 
-    @OneToMany(mappedBy = "cohort", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cohort")
     private List<Student> students = new ArrayList<>();
 }

@@ -18,6 +18,6 @@ public class Employee extends User{
 
     private String job;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Cohort> cohorts = new HashSet<>();
 }
